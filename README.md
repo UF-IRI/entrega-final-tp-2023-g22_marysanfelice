@@ -1,16 +1,12 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/LU25kJIG)
-# G***NroGrupo***_***Apellido1******Apellido2***
+# G***00***_***Docentes***
   "Breve descripción del trabajo"
 
 ## Integrantes
-- Alumno 1
-- Alumno 2
+- Docentes de Práctica
 
 ## Objetivo del proyecto
-"Descripción del problema y el objetivo del desarrollo del proyecto"
-
-## Requisitos
-"Explicación de requisitos, librerias y explicaciones de uso"
+Desarrollo de una agenda que permite la adicción, modificación, busqueda y elminación de contactos.
+Tanto la lectura como escritura de los archivos es en archivos dinarios.
 
 ## Documentacion
 [CPlusPlus](https://cplusplus.com/)
