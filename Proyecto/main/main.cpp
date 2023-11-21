@@ -28,7 +28,7 @@ int main() {
     while (getline(archivoClientes, line)) {
         cantClientes++;
     }
-    cout<< "Cantidad de clientes: " << cantClientes << endl;
+    cout<< "Cantidad de clientes: " << cantClientes;
     Cliente *clientes = new Cliente[cantClientes];
     eCodArchivos resClientes = leerClientes(clientes, archivoClientes);
     uint cantClases = -1;
@@ -52,15 +52,16 @@ int main() {
     cout << "Cantidad de asistencias: " << cantAsistencias << endl;
     Asistencia *asistencias = new Asistencia[cantAsistencias - 1];
     eCodArchivos resAsistencias = leerAsistencias(archivoAsistencias, asistencias);
-    //cout << resAsistencias << endl;
     uint idReserva = numeroRandom(1, cantClases);
     uint idCliente = numeroRandom(1, cantClientes);
     Reserva* reservas;
     uint cantReservas;
     eReservarClase reservaFinal;
     Sistema* sistema= new Sistema({clientes, cantClientes, asistencias, cantAsistencias, 45, clases, cantClases, reservas, cantReservas});
+    if(sistema->cantAsistencias >= sistema->cantMaxAsistencias){
+    resizeAsistencia(sistema->asistencias, sistema->cantAsistencias, sistema->cantAsistencias*2);
+    }
     reservaFinal = ReservarClase(sistema, idReserva, idCliente);
-    cout<< reservaFinal;
     delete[] clientes;
     delete[] clases;
     delete[] asistencias;
