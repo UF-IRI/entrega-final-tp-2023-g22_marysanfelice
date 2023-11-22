@@ -1,18 +1,20 @@
 #include "asistencia.h"
 
 
-void resizeAsistencia(Asistencia* miLista, uint tam, uint nuevoTam) {
+void resizeAsistencia(Asistencia** miLista, uint tam, uint nuevoTam) {
     Asistencia* aux = new Asistencia[nuevoTam];
+    Asistencia* auxLista = *miLista;
+    if (aux == nullptr)
+        return;
 
-    uint longitud = (tam <  nuevoTam) ? tam : nuevoTam;
+    uint longitud = (tam < nuevoTam) ? tam : nuevoTam;
 
-    if(aux != nullptr) {
-
-        for(uint i = 0; i < longitud; i++)
-            aux[i] = miLista[i]; // *(miLista + i)
-
-        delete[] miLista;
+    for (uint i = 0; i < longitud; i++){
+        aux[i] = auxLista[i];
     }
+
+    delete[] *miLista;
+    *miLista = aux;
 }
 
 eCodArchivos leerAsistencias(ifstream& Archi, Asistencia* asistencias)

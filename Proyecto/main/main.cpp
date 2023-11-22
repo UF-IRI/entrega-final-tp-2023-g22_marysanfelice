@@ -59,14 +59,32 @@ int main() {
     eReservarClase reservaFinal;
     Sistema* sistema= new Sistema({clientes, cantClientes, asistencias, cantAsistencias, 45, clases, cantClases, reservas, cantReservas});
     if(sistema->cantAsistencias >= sistema->cantMaxAsistencias){
-    resizeAsistencia(sistema->asistencias, sistema->cantAsistencias, sistema->cantAsistencias*2);
+    resizeAsistencia(&sistema->asistencias, sistema->cantAsistencias, sistema->cantAsistencias*2);
     }
     reservaFinal = ReservarClase(sistema, idReserva, idCliente);
+    ifstream ArchiFinal("../../asistencias_", ios::binary);
+    uint cantAsistenciasFinal = -1;
+    uint auxLeerAsistenciasFinal;
+    while (!ArchiFinal.eof()) {
+    ArchiFinal.read((char *)&auxLeerAsistenciasFinal, sizeof(uint));
+    ArchiFinal.read((char *)&auxLeerAsistenciasFinal, sizeof(uint));
+    Inscripcion auxInscripcionesFinal;
+    for (uint i = 0; i < auxLeerAsistenciasFinal; i++) {
+      ArchiFinal.read((char *)&auxInscripcionesFinal, sizeof(Inscripcion));
+    }
+    cantAsistenciasFinal++;
+    }
+    cout << "Cantidad de asistencias archivo nuevo: " << cantAsistenciasFinal << endl;
+    Asistencia *asistenciasFinal = new Asistencia[cantAsistenciasFinal - 1];
+    eCodArchivos resFinal = leerAsistencias(ArchiFinal, asistenciasFinal);
+    cout << resFinal;
     delete[] clientes;
     delete[] clases;
     delete[] asistencias;
+    delete[] asistenciasFinal;
     archivoClientes.close();
     archivoClases.close();
     archivoAsistencias.close();
+    ArchiFinal.close();
     return 0;
 }
