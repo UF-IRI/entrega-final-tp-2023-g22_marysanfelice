@@ -1,6 +1,6 @@
 #include "asistencia.h"
 
-
+/*
 void resizeAsistencia(Asistencia** miLista, uint tam, uint nuevoTam) {
     Asistencia* aux = new Asistencia[nuevoTam];
     Asistencia* auxLista = *miLista;
@@ -15,6 +15,22 @@ void resizeAsistencia(Asistencia** miLista, uint tam, uint nuevoTam) {
 
     delete[] *miLista;
     *miLista = aux;
+}
+*/
+void resizeAsistencia(Asistencia*& vector, uint& n) //el vector tiene *& porque es una variable DINAMICA a la que le voy a modificar la direccion de memoria y su contenido
+{
+    n = (n)+1; //aumento en uno mi contador de tamanio
+    Asistencia* aux = new Asistencia[(n)]; //me hago un auxiliar con un nuevo tamanio
+
+
+    for (int i = 0; i < n - 1; i++) //es hasta n-1 ya que mi vector no todavia tiene tamanio n
+    {
+        aux[i] = vector[i]; //copio las cosas en el auxiliar
+    }
+    delete[]vector; //libero la memoria de donde estaba vector
+
+    vector = aux; //le asigno la nueva memoria
+
 }
 
 eCodArchivos leerAsistencias(ifstream& Archi, Asistencia* asistencias)

@@ -45,9 +45,9 @@ int main() {
         archivoAsistencias.read((char *)&auxLeerAsistencias, sizeof(uint));
         Inscripcion auxInscripciones;
         for (uint i = 0; i < auxLeerAsistencias; i++) {
-      archivoAsistencias.read((char *)&auxInscripciones, sizeof(Inscripcion));
+            archivoAsistencias.read((char *)&auxInscripciones, sizeof(Inscripcion));
         }
-    cantAsistencias++;
+        cantAsistencias++;
     }
     cout << "Cantidad de asistencias: " << cantAsistencias << endl;
     Asistencia *asistencias = new Asistencia[cantAsistencias - 1];
@@ -57,22 +57,23 @@ int main() {
     Reserva* reservas;
     uint cantReservas;
     eReservarClase reservaFinal;
-    Sistema* sistema= new Sistema({clientes, cantClientes, asistencias, cantAsistencias, 45, clases, cantClases, reservas, cantReservas});
+    Sistema* sistema= new Sistema({clientes, cantClientes, asistencias, cantAsistencias -1 , 45, clases, cantClases, reservas, cantReservas});
+
     if(sistema->cantAsistencias >= sistema->cantMaxAsistencias){
-    resizeAsistencia(&sistema->asistencias, sistema->cantAsistencias, sistema->cantAsistencias*2);
-    }
+        resizeAsistencia(sistema->asistencias, sistema->cantAsistencias);
+
     reservaFinal = ReservarClase(sistema, idReserva, idCliente);
     ifstream ArchiFinal("../../asistencias_", ios::binary);
     uint cantAsistenciasFinal = -1;
     uint auxLeerAsistenciasFinal;
     while (!ArchiFinal.eof()) {
-    ArchiFinal.read((char *)&auxLeerAsistenciasFinal, sizeof(uint));
-    ArchiFinal.read((char *)&auxLeerAsistenciasFinal, sizeof(uint));
-    Inscripcion auxInscripcionesFinal;
-    for (uint i = 0; i < auxLeerAsistenciasFinal; i++) {
-      ArchiFinal.read((char *)&auxInscripcionesFinal, sizeof(Inscripcion));
-    }
-    cantAsistenciasFinal++;
+        ArchiFinal.read((char *)&auxLeerAsistenciasFinal, sizeof(uint));
+        ArchiFinal.read((char *)&auxLeerAsistenciasFinal, sizeof(uint));
+        Inscripcion auxInscripcionesFinal;
+        for (uint i = 0; i < auxLeerAsistenciasFinal; i++) {
+            ArchiFinal.read((char *)&auxInscripcionesFinal, sizeof(Inscripcion));
+        }
+        cantAsistenciasFinal++;
     }
     cout << "Cantidad de asistencias archivo nuevo: " << cantAsistenciasFinal << endl;
     Asistencia *asistenciasFinal = new Asistencia[cantAsistenciasFinal - 1];
@@ -87,4 +88,6 @@ int main() {
     archivoAsistencias.close();
     ArchiFinal.close();
     return 0;
+}
+
 }

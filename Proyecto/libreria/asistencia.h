@@ -22,7 +22,7 @@ struct asistencia{
 
 const Asistencia AsistenciasNulo={0, 0, nullptr};
 
-void resizeAsistencia(Asistencia** miLista, uint tam, uint nuevoTam);
+void resizeAsistencia(Asistencia*& vector, uint& n);
 eAgrAsistencia NuevaAsistencia(Asistencia* asistencias,uint cant ,Asistencia asistencia);
 eAgregarIncripcionAsistencia NuevaInscripcionAsistencia(Inscripcion* inscripciones,uint cant,Inscripcion inscripcion);
 //bool hayEspacio(Asistencia* asistencias);
