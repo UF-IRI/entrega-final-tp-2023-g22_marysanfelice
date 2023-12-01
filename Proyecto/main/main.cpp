@@ -51,7 +51,7 @@ int main() {
     }
     cout << "Cantidad de asistencias: " << cantAsistencias << endl;
     Asistencia *asistencias = new Asistencia[cantAsistencias - 1];
-    eCodArchivos resAsistencias = leerAsistencias(archivoAsistencias, asistencias);
+    eCodArchivos resAsistencias = leerAsistencias(archivoAsistencias, asistencias, cantAsistencias);
     uint idReserva = numeroRandom(1, cantClases);
     uint idCliente = numeroRandom(1, cantClientes);
     Reserva* reservas;
@@ -77,7 +77,7 @@ int main() {
     }
     cout << "Cantidad de asistencias archivo nuevo: " << cantAsistenciasFinal << endl;
     Asistencia *asistenciasFinal = new Asistencia[cantAsistenciasFinal - 1];
-    eCodArchivos resFinal = leerAsistencias(ArchiFinal, asistenciasFinal);
+    eCodArchivos resFinal = leerAsistencias(ArchiFinal, asistenciasFinal, cantAsistenciasFinal);
     cout << resFinal;
     delete[] clientes;
     delete[] clases;
@@ -87,7 +87,8 @@ int main() {
     archivoClases.close();
     archivoAsistencias.close();
     ArchiFinal.close();
-    return 0;
-}
 
+    }
+    delete sistema;
+    return 0;
 }
