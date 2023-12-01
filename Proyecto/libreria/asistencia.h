@@ -26,7 +26,7 @@ void resizeAsistencia(Asistencia*& vector, uint& n);
 eAgrAsistencia NuevaAsistencia(Asistencia* asistencias,uint cant ,Asistencia asistencia);
 eAgregarIncripcionAsistencia NuevaInscripcionAsistencia(Inscripcion* inscripciones,uint cant,Inscripcion inscripcion);
 //bool hayEspacio(Asistencia* asistencias);
-eCodArchivos leerAsistencias(ifstream& Archi, Asistencia* asistencias);
+eCodArchivos leerAsistencias(ifstream& Archi, Asistencia* asistencias,uint cant);
 void EscribirAsistencias(Asistencia *asistencias, uint cant);
 Asistencia* BuscarAsistencias(Asistencia* asistencias,uint cant ,uint idCliente);
 

@@ -33,23 +33,34 @@ void resizeAsistencia(Asistencia*& vector, uint& n) //el vector tiene *& porque 
 
 }
 
-eCodArchivos leerAsistencias(ifstream& Archi, Asistencia* asistencias)
-{
+eCodArchivos leerAsistencias(ifstream& Archi, Asistencia* asistencias,uint cant) {
+    if (!Archi.is_open())
+        return eCodArchivos::ErrorApertura;
+
     Archi.clear();
     Archi.seekg(0);
+
     Asistencia *aux = asistencias;
+    uint i=0;
     while (!Archi.eof()) {
+        if(i == cant){
+            break;
+        }
         Archi.read((char *)&aux->idCliente, sizeof(uint));
         Archi.read((char *)&aux->cantInscripciones, sizeof(uint));
-        Inscripcion* anotados = new Inscripcion[aux->cantInscripciones];
-        Inscripcion* auxInscriptions = anotados;
+
+        Inscripcion *registrados = new Inscripcion[aux->cantInscripciones];
+        Inscripcion *auxInscripciones = registrados;
         for (uint i = 0; i < aux->cantInscripciones; i++) {
-            Archi.read((char *)auxInscriptions, sizeof(Inscripcion));
-            auxInscriptions++;
+            Archi.read((char *)auxInscripciones, sizeof(Inscripcion));
+            auxInscripciones++;
         }
-        aux->ClasesInscriptas = anotados;
+        aux->ClasesInscriptas = registrados;
+
         aux++;
+        i++;
     }
+
     return eCodArchivos::ExitoOperacion;
 }
 
