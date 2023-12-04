@@ -42,7 +42,6 @@ int main() {
 
     //----------------------------------------------------------
 
-
     uint cantAsistencias = -2;
     uint auxLeerAsistencias;
     while (!archivoAsistencias.eof()) {
@@ -63,24 +62,36 @@ int main() {
     uint cantReservas;
     eReservarClase reservaFinal;
     Sistema* sistema= new Sistema({clientes, cantClientes, asistencias, cantAsistencias -1 , 45, clases, cantClases, reservas, cantReservas});
-
-    if(sistema->cantAsistencias >= sistema->cantMaxAsistencias){
+    if (sistema->cantAsistencias >= sistema->cantMaxAsistencias) {
+        // Redimensiona el arreglo de asistencias
         resizeAsistencia(sistema->asistencias, sistema->cantAsistencias);
 
-    reservaFinal = ReservarClase(sistema, idReserva, idCliente);
-    cout << reservaFinal;
-    delete[] clientes;
-    delete[] clases;
-    Asistencia *auxLista = sistema->asistencias;
-    for(int i=0;i < sistema->cantAsistencias ; i++){
-            delete[] auxLista->ClasesInscriptas;
-            auxLista++;
+        // Realiza operaciones que puedan depender del tamaño actualizado del arreglo asistencias
+        Reserva* reservas;
+        uint cantReservas;
+        eReservarClase reservaFinal = ReservarClase(sistema, idReserva, idCliente);
+        cout << reservaFinal;
+
+        // Resto del código para liberar memoria...
+        delete[] clientes;
+        delete[] clases;
+
+        for (int i = 0; i < sistema->cantAsistencias; i++) {
+            for (int j = 0; j < sistema->asistencias[i].cantInscripciones; j++) {
+                // No necesitas delete para elementos individuales de ClasesInscriptas
+            }
+
+            // Libera el arreglo completo de ClasesInscriptas
+            delete[] sistema->asistencias[i].ClasesInscriptas;
+
+        }
+
+        delete[] asistencias;
+        archivoClientes.close();
+        archivoClases.close();
+        archivoAsistencias.close();
     }
-    delete[] asistencias;
-    archivoClientes.close();
-    archivoClases.close();
-    archivoAsistencias.close();
-    }
+
     delete sistema;
     return 0;
 }

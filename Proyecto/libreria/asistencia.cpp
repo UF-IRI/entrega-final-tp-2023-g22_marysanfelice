@@ -19,7 +19,7 @@ void resizeAsistencia(Asistencia** miLista, uint tam, uint nuevoTam) {
 */
 void resizeAsistencia(Asistencia*& vector, uint& n) //el vector tiene *& porque es una variable DINAMICA a la que le voy a modificar la direccion de memoria y su contenido
 {
-    n = (n)+1; //aumento en uno mi contador de tamanio
+    n = (n)*2; //aumento en uno mi contador de tamanio
     Asistencia* aux = new Asistencia[(n)]; //me hago un auxiliar con un nuevo tamanio
 
 
