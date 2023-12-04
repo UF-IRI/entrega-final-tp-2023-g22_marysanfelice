@@ -42,7 +42,7 @@ int main() {
 
     //----------------------------------------------------------
 
-    uint cantAsistencias = -2;
+    uint cantAsistencias = -3;
     uint auxLeerAsistencias;
     while (!archivoAsistencias.eof()) {
         archivoAsistencias.read((char *)&auxLeerAsistencias, sizeof(uint));
@@ -61,10 +61,10 @@ int main() {
     Reserva* reservas;
     uint cantReservas;
     eReservarClase reservaFinal;
-    Sistema* sistema= new Sistema({clientes, cantClientes, asistencias, cantAsistencias -1 , 45, clases, cantClases, reservas, cantReservas});
+    Sistema* sistema= new Sistema({clientes, cantClientes, asistencias, cantAsistencias  , cantAsistencias, clases, cantClases, reservas, cantReservas});
     if (sistema->cantAsistencias >= sistema->cantMaxAsistencias) {
         // Redimensiona el arreglo de asistencias
-        resizeAsistencia(sistema->asistencias, sistema->cantAsistencias);
+        resizeAsistencia(sistema->asistencias, sistema->cantMaxAsistencias);
 
         // Realiza operaciones que puedan depender del tamaño actualizado del arreglo asistencias
         Reserva* reservas;
@@ -82,11 +82,12 @@ int main() {
             }
 
             // Libera el arreglo completo de ClasesInscriptas
-            delete[] sistema->asistencias[i].ClasesInscriptas;
+            Asistencia aux = sistema->asistencias[i];
+            delete[] aux.ClasesInscriptas;
 
         }
 
-        delete[] asistencias;
+        delete[] sistema->asistencias;
         archivoClientes.close();
         archivoClases.close();
         archivoAsistencias.close();
