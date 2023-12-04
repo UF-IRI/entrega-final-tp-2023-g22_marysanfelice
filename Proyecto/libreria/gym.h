@@ -10,7 +10,7 @@ enum ReservarClase { ErrEstadoNeg = -8, ErrNohayespacio = -7,ErrNoExisteClase = 
 
 typedef enum buscarClase eBuscarClase;
 typedef enum ReservarClase eReservarClase;
-
+//
 struct clase{
     uint idClase;
     str nombre;
