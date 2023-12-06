@@ -71,6 +71,7 @@ int main() {
         uint cantReservas;
         eReservarClase reservaFinal = ReservarClase(sistema, idReserva, idCliente);
         cout << reservaFinal;
+        EscribirAsistencias(sistema->asistencias,sistema->cantAsistencias);
 
         // Resto del código para liberar memoria...
         delete[] clientes;
