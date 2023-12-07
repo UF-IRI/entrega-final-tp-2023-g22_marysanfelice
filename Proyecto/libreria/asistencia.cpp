@@ -78,7 +78,7 @@ void EscribirAsistencias(Asistencia *asistencias, uint cant) {
             ArchiEscritura.write((char *)&aux[i].cantInscripciones, sizeof(uint));
             for (uint j = 0; j < aux[i].cantInscripciones; j++) {
                 ArchiEscritura.write((char *)&aux[i].ClasesInscriptas[j], sizeof(Inscripcion));
-                cout<< "Asistencia nro " << i << "reservada" << endl;
+                cout<< "Asistencia nro " << i << " reservada" << endl;
             }
         }
     }
